@@ -126,77 +126,55 @@ export function CompanyTabs({ activeCompany, onSwitch }: CompanySwitcherProps) {
           ].join(' ')}
         >
           {/* Label */}
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-text-secondary mb-3">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-text-secondary mb-2">
             Switch Company
           </p>
 
-          {/* 2-column grid of company cards */}
-          <div className="grid grid-cols-2 gap-1.5">
+          {/* Plain vertical list — just company names, no boxes or abbr tags */}
+          <ul role="listbox" className="flex flex-col">
             {companies.map((co) => {
               const isActive = co.id === activeCompany.id
               return (
-                <button
-                  key={co.id}
-                  role="option"
-                  aria-selected={isActive}
-                  onClick={() => handleSelect(co)}
-                  className={[
-                    'group relative flex flex-col items-start gap-1.5',
-                    'rounded-lg border px-3 py-2.5 text-left',
-                    'transition-all duration-150',
-                    'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
-                    isActive
-                      ? 'border-accent bg-tint'
-                      : 'border-border bg-bg hover:border-accent/50 hover:bg-surface',
-                  ].join(' ')}
-                >
-                  {/* Active check — small tick, no circle */}
-                  {isActive && (
-                    <svg
-                      aria-hidden="true"
-                      width="10"
-                      height="10"
-                      viewBox="0 0 10 10"
-                      fill="none"
-                      className="absolute top-2.5 right-2.5 text-accent"
-                    >
-                      <path
-                        d="M1.5 5L3.5 7L8.5 2"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  )}
-
-                  {/* Abbreviation tag */}
-                  <span
+                <li key={co.id} role="none">
+                  <button
+                    role="option"
+                    aria-selected={isActive}
+                    onClick={() => handleSelect(co)}
                     className={[
-                      'font-mono text-[9px] font-bold tracking-widest uppercase px-1.5 py-0.5 rounded-sm',
+                      'w-full flex items-center justify-between gap-3',
+                      'px-2 py-2 rounded-lg text-left text-sm',
+                      'transition-colors duration-150',
+                      'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
                       isActive
-                        ? 'bg-accent text-on-accent'
-                        : 'bg-border/50 text-text-secondary',
-                    ].join(' ')}
-                  >
-                    {co.abbr}
-                  </span>
-
-                  {/* Company name */}
-                  <span
-                    className={[
-                      'text-[11px] font-medium leading-tight pr-4',
-                      isActive
-                        ? 'text-accent'
-                        : 'text-text group-hover:text-accent transition-colors',
+                        ? 'text-accent font-semibold'
+                        : 'text-text font-normal hover:text-accent hover:bg-bg',
                     ].join(' ')}
                   >
                     {co.name}
-                  </span>
-                </button>
+                    {/* Tick mark for the active company */}
+                    {isActive && (
+                      <svg
+                        aria-hidden="true"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        className="shrink-0 text-accent"
+                      >
+                        <path
+                          d="M2 6L4.5 8.5L10 3"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                </li>
               )
             })}
-          </div>
+          </ul>
         </div>
       )}
     </div>
