@@ -1,0 +1,98 @@
+[
+  {
+    "id": "booking-tool",
+    "name": "Booking Tool",
+    "description": "Multi-carrier ticketing, NDC direct connect, and live seat reservation desk.",
+    "iconName": "AirplaneTakeOff01Icon",
+    "scope": ["travels", "fcm", "travelden"],
+    "url": "#"
+  },
+  {
+    "id": "corporate-crm",
+    "name": "Corporate CRM",
+    "description": "Key client profiles, corporate traveller registries, and booking records.",
+    "iconName": "UserAccountIcon",
+    "scope": ["travels", "fcm"],
+    "url": "#"
+  },
+  {
+    "id": "supplier-portal",
+    "name": "Supplier Portal",
+    "description": "Airline commissions, hotel inventory matrices, and partner contracts.",
+    "iconName": "Building04Icon",
+    "scope": ["travels", "fcm", "travelden", "holidays"],
+    "url": "#"
+  },
+  {
+    "id": "learning-platform",
+    "name": "Learning Platform",
+    "description": "IATA training modules, safety compliance certifications, and skills courses.",
+    "iconName": "GraduateMaleIcon",
+    "scope": "group",
+    "url": "#"
+  },
+  {
+    "id": "facilities-requests",
+    "name": "Facilities Requests",
+    "description": "Office access passes, desk allocations, boardroom bookings, and fleet logistics.",
+    "iconName": "Office365Icon",
+    "scope": "group",
+    "url": "#"
+  },
+  {
+    "id": "hr-self-service",
+    "name": "HR Self-Service",
+    "description": "Annual leave schedules, payslip archives, medical insurance HMO, and perks.",
+    "iconName": "UserIdVerificationIcon",
+    "scope": "group",
+    "url": "#"
+  },
+  {
+    "id": "flight-simulator",
+    "name": "Simulator Bookings",
+    "description": "Reserve simulator bays and schedule proficiency checks for flight crews.",
+    "iconName": "FlightLandIcon",
+    "scope": ["academy"],
+    "url": "#"
+  },
+  {
+    "id": "crm-academy",
+    "name": "Academy CRM",
+    "description": "Student enrolment, course registrations, and exam records.",
+    "iconName": "BookOpen01Icon",
+    "scope": ["academy"],
+    "url": "#"
+  },
+  {
+    "id": "holidays-booking",
+    "name": "Holidays Booking Engine",
+    "description": "Package tours, excursion add-ons, and supplier vouchers.",
+    "iconName": "PalmTreeIcon",
+    "scope": ["holidays"],
+    "url": "#"
+  },
+  {
+    "id": "gds-terminal",
+    "name": "GDS Terminal",
+    "description": "Sabre and Amadeus direct terminal access for travel agents.",
+    "iconName": "ComputerIcon",
+    "scope": ["fcm", "travelden"],
+    "url": "#"
+  },
+  {
+    "id": "report-centre",
+    "name": "Report Centre",
+    "description": "MIS dashboards, revenue analytics, and occupancy reports.",
+    "iconName": "ChartLineData02Icon",
+    "scope": ["travels", "fcm", "travelden", "holidays", "global"],
+    "url": "#"
+  },
+  {
+    "id": "facilities-mgmt",
+    "name": "Facilities Management",
+    "description": "Building maintenance schedules, asset tracking, and vendor contracts.",
+    "iconName": "Settings02Icon",
+    "scope": ["global"],
+    "url": "#"
+  }
+]

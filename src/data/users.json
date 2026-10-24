@@ -1,0 +1,50 @@
+[
+  {
+    "id": "user-001",
+    "name": "Adaeze Okafor",
+    "firstName": "Adaeze",
+    "role": "Corporate Booking Consultant",
+    "companyId": "travels",
+    "avatarInitials": "AO"
+  },
+  {
+    "id": "user-002",
+    "name": "Capt. Babatunde O.",
+    "firstName": "Capt. Babatunde",
+    "role": "Chief Ground Instructor",
+    "companyId": "academy",
+    "avatarInitials": "BO"
+  },
+  {
+    "id": "user-003",
+    "name": "Ngozi Eze",
+    "firstName": "Ngozi",
+    "role": "Travel Agent",
+    "companyId": "fcm",
+    "avatarInitials": "NE"
+  },
+  {
+    "id": "user-004",
+    "name": "Femi Adeyinka",
+    "firstName": "Femi",
+    "role": "Facilities Manager",
+    "companyId": "global",
+    "avatarInitials": "FA"
+  },
+  {
+    "id": "user-005",
+    "name": "Chioma Obi",
+    "firstName": "Chioma",
+    "role": "Holidays Package Specialist",
+    "companyId": "holidays",
+    "avatarInitials": "CO"
+  },
+  {
+    "id": "user-006",
+    "name": "Tunde Lawal",
+    "firstName": "Tunde",
+    "role": "B2B Account Manager",
+    "companyId": "travelden",
+    "avatarInitials": "TL"
+  }
+]

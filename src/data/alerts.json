@@ -1,0 +1,139 @@
+[
+  {
+    "id": "alert-001",
+    "severity": "critical",
+    "type": "alert",
+    "title": "Payment gateway failure: card payments are failing",
+    "body": "Interswitch and Paystack settlement pipelines are currently experiencing API timeouts across booking checkout flows.",
+    "scope": "group",
+    "minutesAgo": 14,
+    "incidentId": "#INC-8942"
+  },
+  {
+    "id": "alert-002",
+    "severity": "critical",
+    "type": "alert",
+    "title": "Simulator Bay 3 power fault — training suspended",
+    "body": "An electrical fault in Simulator Bay 3 has tripped the circuit breaker. All sessions in Bay 3 are suspended until the engineering team clears the fault.",
+    "scope": ["academy"],
+    "minutesAgo": 37,
+    "incidentId": "#INC-8961"
+  },
+  {
+    "id": "alert-003",
+    "severity": "warning",
+    "type": "alert",
+    "title": "GDS Synchronisation Latency on International Corridors",
+    "body": "Ticket re-issuance delays observed on select international carrier queues. Use alternate terminal where possible.",
+    "scope": ["fcm", "travelden"],
+    "minutesAgo": 300
+  },
+  {
+    "id": "alert-004",
+    "severity": "warning",
+    "type": "alert",
+    "title": "Scheduled Power Maintenance at Ikeja Flight Centre",
+    "body": "Simulators Bay 1 & 2 will transfer to redundant generator circuits from 13:00 to 14:30 WAT. Expect brief interruptions.",
+    "scope": ["academy"],
+    "minutesAgo": 45
+  },
+  {
+    "id": "alert-005",
+    "severity": "warning",
+    "type": "alert",
+    "title": "Updated Bilateral Air Service Agreements — sign-off pending",
+    "body": "All consultants handling Accra and Dakar routes must review and sign off on the updated BASA policy before end of business today.",
+    "scope": ["travels"],
+    "minutesAgo": 180
+  },
+  {
+    "id": "alert-006",
+    "severity": "info",
+    "type": "news",
+    "title": "Updated Bilateral Air Service Agreements Policy",
+    "body": "Revised passenger tax tariffs and transit rules for Accra (ACC) and Dakar (DSS) routes now in effect. Review the updated policy document on the intranet.",
+    "scope": ["travels", "fcm"],
+    "minutesAgo": 120
+  },
+  {
+    "id": "alert-007",
+    "severity": "info",
+    "type": "news",
+    "title": "Annual Group Townhall Scheduled for Finchglow Subsidiaries",
+    "body": "Executive roadmap presentation across all six brands streaming live on the staff intranet. All staff are encouraged to join.",
+    "scope": "group",
+    "minutesAgo": 240
+  },
+  {
+    "id": "alert-008",
+    "severity": "info",
+    "type": "news",
+    "title": "New IATA Dangerous Goods Module Available",
+    "body": "The IATA Dangerous Goods Awareness (DGA) module is now live on the Learning Platform. Mandatory for all check-in and ramp agents.",
+    "scope": ["academy", "travels", "fcm"],
+    "minutesAgo": 480
+  },
+  {
+    "id": "alert-009",
+    "severity": "info",
+    "type": "news",
+    "title": "Summer 2027 Holiday Packages Now on Sale",
+    "body": "Maldives, Seychelles, and Santorini packages are now bookable through the Holidays Booking Engine. Early-bird rates apply until 30 November.",
+    "scope": ["holidays"],
+    "minutesAgo": 600
+  },
+  {
+    "id": "alert-010",
+    "severity": "info",
+    "type": "news",
+    "title": "Head Office Closure — Public Holiday Notice",
+    "body": "All FinchGlobal-managed offices will be closed on 1 November for the public holiday. Essential services roster has been shared via email.",
+    "scope": ["global"],
+    "minutesAgo": 720
+  },
+  {
+    "id": "alert-011",
+    "severity": "warning",
+    "type": "alert",
+    "title": "Travelden B2B Portal Slowness Reported",
+    "body": "Several agents have reported slow load times on the Travelden B2B portal between 08:00–10:00 WAT. The platform team is investigating.",
+    "scope": ["travelden"],
+    "minutesAgo": 90
+  },
+  {
+    "id": "alert-012",
+    "severity": "info",
+    "type": "news",
+    "title": "FCM Travel Nigeria Q3 Performance Report Published",
+    "body": "The Q3 MIS report is available in the Report Centre. Notable growth in corporate MICE bookings and international SME accounts.",
+    "scope": ["fcm"],
+    "minutesAgo": 1440
+  },
+  {
+    "id": "alert-013",
+    "severity": "info",
+    "type": "news",
+    "title": "New Cadet Instructor Cohort Joining Next Week",
+    "body": "Eight new cadet instructors will begin their induction programme on Monday. Please ensure simulator bays are available for orientation.",
+    "scope": ["academy"],
+    "minutesAgo": 360
+  },
+  {
+    "id": "alert-014",
+    "severity": "info",
+    "type": "news",
+    "title": "Facilities Asset Audit — Q4 Schedule Released",
+    "body": "The Q4 asset audit schedule for all Finchglow-managed buildings has been published on the Facilities Management portal.",
+    "scope": ["global", "travels", "fcm"],
+    "minutesAgo": 1080
+  },
+  {
+    "id": "alert-015",
+    "severity": "warning",
+    "type": "alert",
+    "title": "Holiday Package Pricing Engine Maintenance",
+    "body": "The Holidays Booking Engine pricing module will be offline for a scheduled update from 22:00 to 00:00 WAT tonight.",
+    "scope": ["holidays"],
+    "minutesAgo": 60
+  }
+]

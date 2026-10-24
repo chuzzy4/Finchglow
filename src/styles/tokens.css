@@ -1,0 +1,126 @@
+/*
+ * styles/tokens.css
+ *
+ * All design tokens live here. Components reference only Tailwind utility
+ * classes such as bg-accent, text-on-accent, bg-tint — never hex values.
+ *
+ * Company theming works by setting data-company="<id>" on <html>.
+ * The matching selector below swaps --color-accent, --color-brand-mark
+ * and --color-tint. Everything else stays the same.
+ *
+ * To add a seventh company: add one more [data-company="<id>"] block here
+ * and one object to src/config/companies.ts. No component code changes.
+ */
+
+/* ─── Base tokens (company-independent) ─────────────────────────────────── */
+:root {
+  /* Text */
+  --color-text:            #0A2B47;
+  --color-text-secondary:  #4A5B6B;
+
+  /* Surfaces */
+  --color-bg:              #F7F8FA;
+  --color-surface:         #FFFFFF;
+  --color-border:          #E2E8F0;
+
+  /* Severity — fixed, never overridden by company theme */
+  --color-critical-bg:     #B42318;
+  --color-critical-fg:     #FFFFFF;
+  --color-critical-bar-bg: #7A1810;   /* slim acknowledged bar, slightly darker */
+  --color-warning-bg:      #FFF4E0;
+  --color-warning-fg:      #92400E;
+  --color-info-bg:         #E8F4FC;
+  --color-info-fg:         #0B5C9E;
+
+  /* Company accent tokens — default to "travels" values */
+  --color-accent:          #C1121F;
+  --color-brand-mark:      #ef233c;
+  --color-tint:            #FDE8EA;
+  --color-on-accent:       #FFFFFF;
+
+  /* Header gradient strip (3 px, always the same) */
+  --gradient-header: linear-gradient(to right, #06b6d4, #7c3aed, #22c55e, #f97316);
+
+  /* Focus ring */
+  --color-focus-ring:      #2563EB;
+}
+
+/* ─── Company theme overrides ────────────────────────────────────────────── */
+[data-company="travels"] {
+  --color-accent:      #C1121F;
+  --color-brand-mark:  #ef233c;
+  --color-tint:        #FDE8EA;
+}
+
+[data-company="fcm"] {
+  --color-accent:      #7f055f;
+  --color-brand-mark:  #7f055f;
+  --color-tint:        #e5a4cb;
+}
+
+[data-company="travelden"] {
+  --color-accent:      #ac274f;
+  --color-brand-mark:  #eb638b;
+  --color-tint:        #FCE9EF;
+}
+
+[data-company="holidays"] {
+  --color-accent:      #7d4f50;
+  --color-brand-mark:  #cc8b86;
+  --color-tint:        #f9eae1;
+}
+
+[data-company="academy"] {
+  --color-accent:      #4e598c;
+  --color-brand-mark:  #4e598c;
+  --color-tint:        #E9EBF4;
+}
+
+[data-company="global"] {
+  --color-accent:      #7b515b;
+  --color-brand-mark:  #7b515b;
+  --color-tint:        #F3ECEE;
+}
+
+/* ─── Tailwind v4 @theme — maps CSS variables to utility classes ─────────── */
+@theme {
+  /* Company tokens */
+  --color-accent:          var(--color-accent);
+  --color-brand-mark:      var(--color-brand-mark);
+  --color-tint:            var(--color-tint);
+  --color-on-accent:       var(--color-on-accent);
+
+  /* Base */
+  --color-text:            var(--color-text);
+  --color-text-secondary:  var(--color-text-secondary);
+  --color-bg:              var(--color-bg);
+  --color-surface:         var(--color-surface);
+  --color-border:          var(--color-border);
+
+  /* Severity */
+  --color-critical-bg:     var(--color-critical-bg);
+  --color-critical-fg:     var(--color-critical-fg);
+  --color-critical-bar-bg: var(--color-critical-bar-bg);
+  --color-warning-bg:      var(--color-warning-bg);
+  --color-warning-fg:      var(--color-warning-fg);
+  --color-info-bg:         var(--color-info-bg);
+  --color-info-fg:         var(--color-info-fg);
+
+  /* Focus */
+  --color-focus-ring:      var(--color-focus-ring);
+
+  /* Font */
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* ─── Reduced-motion: strip all transitions and animations ───────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
