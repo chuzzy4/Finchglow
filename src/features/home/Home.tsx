@@ -50,13 +50,12 @@ export function Home({
 
   return (
     <div>
-      {/* Breadcrumb chips */}
-      <div className="flex items-center gap-2 mb-4">
-        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-accent">
-          <span className="size-1.5 rounded-full bg-brand-mark" aria-hidden="true" />
+      {/* Breadcrumb: company name + role, separated by a slash */}
+      <div className="flex items-center gap-1.5 mb-4">
+        <span className="text-xs font-semibold text-accent tracking-wide">
           {companyName}
         </span>
-        <span className="text-border" aria-hidden="true">•</span>
+        <span className="text-border text-xs select-none" aria-hidden="true">/</span>
         <span className="text-xs text-text-secondary">{user.role}</span>
       </div>
 

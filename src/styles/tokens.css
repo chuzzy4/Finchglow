@@ -43,6 +43,8 @@
 
   /* Focus ring */
   --color-focus-ring:      #2563EB;
+  /* Search input active border — fixed brand blue */
+  --color-search-ring:     #00A8E8;
 }
 
 /* ─── Company theme overrides ────────────────────────────────────────────── */
@@ -108,6 +110,7 @@
 
   /* Focus */
   --color-focus-ring:      var(--color-focus-ring);
+  --color-search-ring:     var(--color-search-ring);
 
   /* Font */
   --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;

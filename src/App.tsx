@@ -104,7 +104,7 @@ export default function App() {
 
         {/* ── Header ─────────────────────────────────────────────────────── */}
         <header className="bg-surface border-b border-border sticky top-0 z-30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-3">
             {/* Logo */}
             <a href="/" aria-label="Finchglow Holdings — Group Staff Portal home" onClick={(e) => e.preventDefault()}>
               <img
@@ -113,6 +113,9 @@ export default function App() {
                 className="h-8 w-auto object-contain"
               />
             </a>
+
+            {/* Company switcher trigger — opens the popover modal */}
+            <CompanyTabs activeCompany={activeCompany} onSwitch={switchCompany} />
 
             {/* Search bar — grows to fill available space */}
             <div className="flex-1 max-w-xl mx-auto">
@@ -124,27 +127,16 @@ export default function App() {
               />
             </div>
 
-            {/* User avatar */}
-            <div className="flex items-center gap-2.5 shrink-0">
-              <div className="text-right hidden sm:block">
-                <p className="text-xs font-semibold text-text leading-tight">{CURRENT_USER.name}</p>
-                <p className="text-xs text-text-secondary leading-tight">{CURRENT_USER.role}</p>
-              </div>
-              <div
-                aria-label={`User: ${CURRENT_USER.name}`}
-                className="size-9 rounded-full bg-accent text-on-accent flex items-center justify-center text-xs font-bold shrink-0 select-none"
-              >
-                {CURRENT_USER.avatarInitials}
-              </div>
+            {/* User info — name + role, no avatar circle */}
+            <div className="flex flex-col items-end shrink-0">
+              <p className="text-xs font-semibold text-text leading-tight">{CURRENT_USER.name}</p>
+              <p className="text-xs text-text-secondary leading-tight">{CURRENT_USER.role}</p>
             </div>
           </div>
 
-          {/* 3 px gradient line — decorative, always the same regardless of company */}
+          {/* 3 px gradient line — decorative */}
           <div className="header-gradient-line" aria-hidden="true" />
         </header>
-
-        {/* ── Company tab bar ─────────────────────────────────────────── */}
-        <CompanyTabs activeCompany={activeCompany} onSwitch={switchCompany} />
 
         {/* ── Critical alert banner ────────────────────────────────────── */}
         <AlertsBanner alerts={alerts} companyId={activeCompany.id} />
@@ -183,18 +175,21 @@ export default function App() {
                 />
               </div>
 
-              {/* Right: alerts & news feed */}
+              {/* Right: alerts & news feed — sticky, scrollable on large screens */}
               <aside
                 aria-label="Alerts and News"
                 className="w-full lg:w-80 xl:w-96 shrink-0"
               >
-                <AlertsFeed
-                  alerts={alerts}
-                  loading={alertsLoading}
-                  error={alertsError}
-                  companyId={activeCompany.id}
-                  onRetry={alertsRetry}
-                />
+                {/* On lg+ the aside sticks below the header and scrolls internally */}
+                <div className="lg:sticky lg:top-[57px] lg:max-h-[calc(100vh-57px)] lg:overflow-y-auto lg:pb-6">
+                  <AlertsFeed
+                    alerts={alerts}
+                    loading={alertsLoading}
+                    error={alertsError}
+                    companyId={activeCompany.id}
+                    onRetry={alertsRetry}
+                  />
+                </div>
               </aside>
             </div>
           )}
@@ -204,8 +199,10 @@ export default function App() {
         <footer className="bg-surface border-t border-border mt-auto">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between text-xs text-text-secondary">
             {activeCriticals.length > 0 ? (
-              <span className="flex items-center gap-1.5">
-                <span className="size-1.5 rounded-full bg-critical-bg animate-pulse" aria-hidden="true" />
+              <span className="flex items-center gap-2">
+                <span className="rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-critical-bg text-critical-fg">
+                  Live
+                </span>
                 <strong className="font-semibold text-critical-bg">
                   {activeCriticals.length} incident{activeCriticals.length > 1 ? 's' : ''} active
                 </strong>

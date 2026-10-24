@@ -52,10 +52,10 @@ export function SearchBar({ query, scope, onQueryChange, onScopeChange }: Search
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}
           className={[
-            'w-full rounded-lg border border-border bg-surface pl-9 pr-10 py-2 text-sm',
+            'w-full rounded-lg border bg-surface pl-9 pr-10 py-2 text-sm',
             'text-text placeholder:text-text-secondary',
-            'focus:outline-none focus:ring-2 focus:ring-focus-ring focus:border-transparent',
-            'transition-shadow',
+            'border-border focus:border-search-ring',
+            'outline-none transition-colors duration-150',
           ].join(' ')}
         />
         {/* "/" hint badge — hidden while typing */}

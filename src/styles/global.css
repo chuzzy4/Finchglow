@@ -62,8 +62,29 @@ body {
   outline: none;
 }
 
+/* Search input uses border-color change on focus — suppress the global ring */
+#search-input:focus-visible {
+  outline: none;
+}
+
 /* ─── Header gradient strip ──────────────────────────────────────────────── */
 .header-gradient-line {
   height: 3px;
   background: var(--gradient-header);
+}
+
+/* ─── Company switcher modal animation ───────────────────────────────────── */
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fade-in-down 0.15s ease-out both;
 }
