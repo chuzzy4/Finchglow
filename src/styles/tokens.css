@@ -61,9 +61,9 @@
 }
 
 [data-company="travelden"] {
-  --color-accent:      #ac274f;
-  --color-brand-mark:  #eb638b;
-  --color-tint:        #FCE9EF;
+  --color-accent:      #1a7a4a;
+  --color-brand-mark:  #27ae60;
+  --color-tint:        #e8f8f0;
 }
 
 [data-company="holidays"] {
@@ -79,9 +79,9 @@
 }
 
 [data-company="global"] {
-  --color-accent:      #7b515b;
-  --color-brand-mark:  #7b515b;
-  --color-tint:        #F3ECEE;
+  --color-accent:      #0a8abf;
+  --color-brand-mark:  #2DB6F7;
+  --color-tint:        #e3f6ff;
 }
 
 /* ─── Tailwind v4 @theme — maps CSS variables to utility classes ─────────── */

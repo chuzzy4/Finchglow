@@ -19,7 +19,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react'
-import logoImg from './Logo.webp'
+import logoImg from '/Logo.webp'
 import { companies } from './config/companies'
 import type { CompanyConfig } from './config/companies'
 import usersData from './data/users.json'
@@ -104,21 +104,32 @@ export default function App() {
 
         {/* ── Header ─────────────────────────────────────────────────────── */}
         <header className="bg-surface border-b border-border sticky top-0 z-30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-3">
-            {/* Logo */}
-            <a href="/" aria-label="Finchglow Holdings — Group Staff Portal home" onClick={(e) => e.preventDefault()}>
+          {/*
+           * Mobile-first layout:
+           *   [logo] [switcher] [search──────flex-1] [user-text(sm+)]
+           * On screens < sm the user text is hidden to prevent overflow.
+           */}
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 py-2 flex items-center gap-2 sm:gap-3 min-w-0">
+
+            {/* Logo — fixed width, never shrinks */}
+            <a
+              href="/"
+              aria-label="Finchglow Holdings — Group Staff Portal home"
+              onClick={(e) => e.preventDefault()}
+              className="shrink-0"
+            >
               <img
                 src={logoImg}
                 alt="Finchglow Holdings"
-                className="h-8 w-auto object-contain"
+                className="h-7 sm:h-8 w-auto object-contain"
               />
             </a>
 
-            {/* Company switcher trigger — opens the popover modal */}
+            {/* Company switcher — shrink-0 so it never collapses to zero */}
             <CompanyTabs activeCompany={activeCompany} onSwitch={switchCompany} />
 
-            {/* Search bar — grows to fill available space */}
-            <div className="flex-1 max-w-xl mx-auto">
+            {/* Search bar — flex-1 takes all remaining space */}
+            <div className="flex-1 min-w-0">
               <SearchBar
                 query={query}
                 scope={scope}
@@ -127,10 +138,10 @@ export default function App() {
               />
             </div>
 
-            {/* User info — name + role, no avatar circle */}
-            <div className="flex flex-col items-end shrink-0">
-              <p className="text-xs font-semibold text-text leading-tight">{CURRENT_USER.name}</p>
-              <p className="text-xs text-text-secondary leading-tight">{CURRENT_USER.role}</p>
+            {/* User name + role — hidden on mobile, visible sm+ */}
+            <div className="hidden sm:flex flex-col items-end shrink-0">
+              <p className="text-xs font-semibold text-text leading-tight whitespace-nowrap">{CURRENT_USER.name}</p>
+              <p className="text-xs text-text-secondary leading-tight whitespace-nowrap">{CURRENT_USER.role}</p>
             </div>
           </div>
 
@@ -206,8 +217,7 @@ export default function App() {
                 <strong className="font-semibold text-critical-bg">
                   {activeCriticals.length} incident{activeCriticals.length > 1 ? 's' : ''} active
                 </strong>
-                {' — '}
-                {activeCriticals[0]!.title}
+                {/* {activeCriticals[0]!.title} */}
               </span>
             ) : (
               <span>All systems operational</span>

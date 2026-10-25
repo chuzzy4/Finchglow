@@ -1,22 +1,20 @@
 /**
  * src/features/switcher/CompanyTabs.tsx
  *
- * Company switcher — a trigger button in the header that opens an inline
- * dropdown panel beneath it. Clicking a card switches the active company
- * and closes the dropdown.
+ * Company switcher — trigger button → dropdown list of companies.
+ *
+ * Positioning: the dropdown is `position:fixed`, anchored via useLayoutEffect
+ * that reads the trigger button's bounding rect. This is the only reliable
+ * way to avoid viewport overflow regardless of where the trigger sits in the
+ * layout. On mobile the dropdown stretches edge-to-edge with a small margin.
  *
  * Accessibility:
- * - Trigger has aria-haspopup="listbox" and aria-expanded
- * - Dropdown is role="listbox" with aria-label
- * - Escape key closes it
- * - Click outside (via a transparent overlay) closes it
- * - Returns focus to the trigger on close
- *
- * Design: a clean dropdown with rectangular company cards, no dots or circles.
- * The wrapper div is position:relative so the dropdown anchors naturally.
+ * - Trigger: aria-haspopup="listbox", aria-expanded
+ * - Dropdown: role="listbox", each option role="option" aria-selected
+ * - Escape closes; click-outside closes; focus returns to trigger
  */
 
-import { useRef, useEffect, useCallback, useState } from 'react'
+import { useRef, useEffect, useLayoutEffect, useCallback, useState } from 'react'
 import { companies } from '../../config/companies'
 import type { CompanyConfig } from '../../config/companies'
 import { Building04Icon } from '../../lib/icon'
@@ -28,8 +26,26 @@ interface CompanySwitcherProps {
 
 export function CompanyTabs({ activeCompany, onSwitch }: CompanySwitcherProps) {
   const [open, setOpen] = useState(false)
+  // Dropdown position in px — calculated from the trigger's bounding rect
+  const [dropPos, setDropPos] = useState({ top: 0, left: 0, width: 0 })
+
   const triggerRef = useRef<HTMLButtonElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Every time the dropdown opens, measure the trigger and set position
+  useLayoutEffect(() => {
+    if (!open || !triggerRef.current) return
+    const rect = triggerRef.current.getBoundingClientRect()
+    const vw = window.innerWidth
+    const dropW = Math.min(220, vw - 16) // 220px max, 8px margin each side
+    // Default: left-align with the trigger
+    let left = rect.left
+    // If it would overflow the right edge, right-align instead
+    if (left + dropW > vw - 8) left = vw - dropW - 8
+    // Never go off the left edge
+    if (left < 8) left = 8
+    setDropPos({ top: rect.bottom + 6, left, width: dropW })
+  }, [open])
 
   // Close on Escape
   useEffect(() => {
@@ -44,20 +60,16 @@ export function CompanyTabs({ activeCompany, onSwitch }: CompanySwitcherProps) {
     return () => document.removeEventListener('keydown', handleKey)
   }, [open])
 
-  // Close when clicking outside the wrapper
+  // Close when clicking outside
   useEffect(() => {
     if (!open) return
     function handleClick(e: MouseEvent) {
       if (
-        dropdownRef.current &&
-        triggerRef.current &&
-        !dropdownRef.current.contains(e.target as Node) &&
-        !triggerRef.current.contains(e.target as Node)
-      ) {
-        setOpen(false)
-      }
+        dropdownRef.current?.contains(e.target as Node) ||
+        triggerRef.current?.contains(e.target as Node)
+      ) return
+      setOpen(false)
     }
-    // Use capture so it fires before the event reaches other handlers
     document.addEventListener('mousedown', handleClick, true)
     return () => document.removeEventListener('mousedown', handleClick, true)
   }, [open])
@@ -72,8 +84,8 @@ export function CompanyTabs({ activeCompany, onSwitch }: CompanySwitcherProps) {
   )
 
   return (
-    // position:relative anchors the dropdown to this wrapper
-    <div className="relative shrink-0">
+    // shrink-0 keeps the trigger from collapsing inside the header flex row
+    <div className="shrink-0">
 
       {/* ── Trigger button ────────────────────────────────────────────── */}
       <button
@@ -84,15 +96,16 @@ export function CompanyTabs({ activeCompany, onSwitch }: CompanySwitcherProps) {
         aria-label={`Active company: ${activeCompany.name}. Click to switch.`}
         onClick={() => setOpen((v) => !v)}
         className={[
-          'flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium',
+          'flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-sm font-medium',
           'border border-border bg-surface text-text',
           'hover:border-accent hover:text-accent transition-colors duration-150',
           'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
         ].join(' ')}
       >
-        <Building04Icon size={14} aria-hidden="true" className="text-accent" />
-        <span className="max-w-[100px] sm:max-w-[140px] truncate">{activeCompany.name}</span>
-        {/* Chevron rotates when open */}
+        <Building04Icon size={14} aria-hidden="true" className="text-accent shrink-0" />
+        {/* Company name — hidden on mobile to keep the header compact */}
+        <span className="hidden sm:inline max-w-[140px] truncate">{activeCompany.name}</span>
+        {/* Chevron — rotates when open */}
         <svg
           aria-hidden="true"
           width="10"
@@ -111,27 +124,26 @@ export function CompanyTabs({ activeCompany, onSwitch }: CompanySwitcherProps) {
         </svg>
       </button>
 
-      {/* ── Dropdown panel ────────────────────────────────────────────── */}
+      {/* ── Dropdown panel — fixed-positioned, never overflows viewport ── */}
       {open && (
         <div
           ref={dropdownRef}
           role="listbox"
           aria-label="Switch company"
+          style={{
+            position: 'fixed',
+            top: dropPos.top,
+            left: dropPos.left,
+            width: dropPos.width,
+          }}
           className={[
-            'absolute left-0 top-[calc(100%+6px)] z-50',
-            'w-[min(360px,calc(100vw-2rem))]',
+            'z-50',
             'bg-surface border border-border rounded-xl shadow-xl',
-            'p-4 focus:outline-none',
+            'py-2 px-1 focus:outline-none',
             'animate-fade-in-down',
           ].join(' ')}
         >
-          {/* Label */}
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-text-secondary mb-2">
-            Switch Company
-          </p>
-
-          {/* Plain vertical list — just company names, no boxes or abbr tags */}
-          <ul role="listbox" className="flex flex-col">
+          <ul className="flex flex-col">
             {companies.map((co) => {
               const isActive = co.id === activeCompany.id
               return (
@@ -141,8 +153,8 @@ export function CompanyTabs({ activeCompany, onSwitch }: CompanySwitcherProps) {
                     aria-selected={isActive}
                     onClick={() => handleSelect(co)}
                     className={[
-                      'w-full flex items-center justify-between gap-3',
-                      'px-2 py-2 rounded-lg text-left text-sm',
+                      'w-full flex items-center justify-between gap-2',
+                      'px-3 py-2 rounded-lg text-left text-sm',
                       'transition-colors duration-150',
                       'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring',
                       isActive
@@ -150,8 +162,8 @@ export function CompanyTabs({ activeCompany, onSwitch }: CompanySwitcherProps) {
                         : 'text-text font-normal hover:text-accent hover:bg-bg',
                     ].join(' ')}
                   >
-                    {co.name}
-                    {/* Tick mark for the active company */}
+                    <span className="truncate">{co.name}</span>
+                    {/* Tick for the active company */}
                     {isActive && (
                       <svg
                         aria-hidden="true"
