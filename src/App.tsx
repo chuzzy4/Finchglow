@@ -186,21 +186,18 @@ export default function App() {
                 />
               </div>
 
-              {/* Right: alerts & news feed — sticky, scrollable on large screens */}
+              {/* Right: alerts & news feed */}
               <aside
                 aria-label="Alerts and News"
                 className="w-full lg:w-80 xl:w-96 shrink-0"
               >
-                {/* On lg+ the aside sticks below the header and scrolls internally */}
-                <div className="lg:sticky lg:top-[57px] lg:max-h-[calc(100vh-57px)] lg:overflow-y-auto lg:pb-6">
-                  <AlertsFeed
-                    alerts={alerts}
-                    loading={alertsLoading}
-                    error={alertsError}
-                    companyId={activeCompany.id}
-                    onRetry={alertsRetry}
-                  />
-                </div>
+                <AlertsFeed
+                  alerts={alerts}
+                  loading={alertsLoading}
+                  error={alertsError}
+                  companyId={activeCompany.id}
+                  onRetry={alertsRetry}
+                />
               </aside>
             </div>
           )}
@@ -208,21 +205,24 @@ export default function App() {
 
         {/* ── Footer ───────────────────────────────────────────────────── */}
         <footer className="bg-surface border-t border-border mt-auto">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between text-xs text-text-secondary">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0 text-xs text-text-secondary">
+            {/* Left: system status */}
             {activeCriticals.length > 0 ? (
               <span className="flex items-center gap-2">
-                <span className="rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-critical-bg text-critical-fg">
+                <span className="rounded px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-critical-bg text-critical-fg shrink-0">
                   Live
                 </span>
                 <strong className="font-semibold text-critical-bg">
                   {activeCriticals.length} incident{activeCriticals.length > 1 ? 's' : ''} active
                 </strong>
-                {/* {activeCriticals[0]!.title} */}
               </span>
             ) : (
               <span>All systems operational</span>
             )}
-            <span>© {new Date().getFullYear()} Finchglow Holdings Group. All rights reserved.</span>
+            {/* Right: copyright — on mobile sits below, on sm+ floats right */}
+            <span className="text-text-secondary/70">
+              © {new Date().getFullYear()} Finchglow Holdings Group. All rights reserved.
+            </span>
           </div>
         </footer>
       </div>

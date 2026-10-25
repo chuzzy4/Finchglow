@@ -48,9 +48,20 @@ export function AlertsFeed({
   })
 
   return (
-    <section aria-label="Alerts and News" className="flex flex-col h-full">
-      {/* Panel header */}
-      <div className="flex items-center justify-between mb-3">
+    /*
+     * The section owns its own scroll container.
+     * max-h is: viewport minus sticky header (~52px) minus main padding (48px).
+     * On mobile the section grows to content height (no cap) so the page
+     * scrolls normally. On lg+ it caps and scrolls internally.
+     */
+    <section
+      aria-label="Alerts and News"
+      className="flex flex-col lg:max-h-[calc(100vh-116px)] lg:overflow-y-auto"
+    >
+      {/* Panel header — sticky so it never scrolls away.
+       *  Mobile: sticks below the app header (top-[52px]).
+       *  lg+: sticks at top-0 inside the section's own overflow-y-auto. */}
+      <div className="sticky top-[52px] lg:top-0 z-10 bg-bg pt-0.5 pb-2 flex items-center justify-between">
         <h2 className="font-semibold text-sm text-text">Alerts &amp; News</h2>
 
         {/* Feed scope tabs — these are NOT the company tablist */}
@@ -73,11 +84,11 @@ export function AlertsFeed({
         </div>
       </div>
 
-      {/* Feed body */}
+      {/* Feed body — no overflow here; the section scrolls as a whole */}
       <div
         aria-live="polite"
         aria-label="Alerts and news list"
-        className="flex flex-col gap-2 overflow-y-auto flex-1"
+        className="flex flex-col gap-2 pb-4"
       >
         {loading && (
           <>
